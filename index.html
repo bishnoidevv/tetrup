@@ -53,9 +53,9 @@
         <div class="bg-[#12131a] border border-gray-800/80 rounded-3xl p-6 flex flex-col items-center text-center relative overflow-hidden">
             <div class="absolute inset-0 glow-bg pointer-events-none"></div>
             
-            <!-- Testerup Brand Logo Area -->
+            <!-- Testerup Brand Logo Area (Now linked to the renamed logo.png) -->
             <div class="w-24 h-24 mb-4 z-10 flex items-center justify-center">
-                <img src="images (1)_3.png" alt="Testerup Logo" class="w-full h-full object-contain drop-shadow-2xl animate-fade-in">
+                <img src="logo.png" alt="Testerup Logo" class="w-full h-full object-contain drop-shadow-2xl animate-fade-in">
             </div>
             
             <!-- App Rating Badge -->
@@ -212,7 +212,6 @@
 
     <!-- Script for Live Voucher Rotation & Modals -->
     <script>
-        // Array containing vouchers with names, amounts, and iOS style flag emojis
         const notificationData = [
             { flag: "🇺🇸", name: "Marcus W.", payout: "$14.70" },
             { flag: "🇨🇦", name: "Emma L.", payout: "$32.40" },
@@ -227,21 +226,17 @@
         function updateTicker() {
             const data = notificationData[currentIndex];
             
-            // Slide & fade out smoothly
             container.classList.add('translate-y-[-20px]', 'opacity-0');
             
             setTimeout(() => {
-                // Swap the content values
                 container.innerHTML = `
                     <span class="inline-block text-base select-none">${data.flag}</span>
                     <p><span class="font-semibold text-white">${data.name}</span> just earned <span class="text-red-500 font-bold">${data.payout}</span> — paid instantly</p>
                 `;
                 
-                // Position below viewport briefly to perform the slide-in up entrance
                 container.classList.remove('translate-y-[-20px]');
                 container.classList.add('translate-y-[20px]');
                 
-                // Trigger entrance slide-up frame
                 setTimeout(() => {
                     container.classList.remove('translate-y-[20px]', 'opacity-0');
                 }, 50);
@@ -251,11 +246,9 @@
             currentIndex = (currentIndex + 1) % notificationData.length;
         }
 
-        // Run ticker immediately and start loop interval
         updateTicker();
         setInterval(updateTicker, 4500);
 
-        // Modal visibility switch
         function toggleModal(show) {
             const modal = document.getElementById('tip-modal');
             if (show) {
