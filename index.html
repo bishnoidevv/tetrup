@@ -8,8 +8,34 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Custom CSS Link -->
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #0d0e12;
+        }
+        .glow-bg {
+            background: radial-gradient(circle at center, rgba(239, 68, 68, 0.12) 0%, rgba(0,0,0,0) 70%);
+        }
+        #ticker-container {
+            will-change: transform, opacity;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0d0e12;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #222531;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 <body class="text-white font-sans antialiased min-h-screen flex flex-col items-center justify-start pb-24 relative select-none">
 
@@ -27,16 +53,9 @@
         <div class="bg-[#12131a] border border-gray-800/80 rounded-3xl p-6 flex flex-col items-center text-center relative overflow-hidden">
             <div class="absolute inset-0 glow-bg pointer-events-none"></div>
             
-            <!-- Testerup Brand Logo Area with Fail-Safe Check -->
-            <div class="w-20 h-20 mb-4 z-10 flex items-center justify-center relative">
-                <!-- Native Image Component calling file: images (1)_2.png -->
-                <img id="main-logo" src="images (1)_2.png" alt="Testerup Logo" class="w-full h-full object-contain drop-shadow-2xl animate-fade-in" onerror="handleLogoFallback()">
-                
-                <!-- Dynamic Local Backup Graphic Asset (Triggers if local file is missing/unreachable) -->
-                <div id="logo-fallback" class="hidden w-20 h-20 rounded-2xl bg-[#1d1e26] border border-red-500/30 flex-col items-center justify-center p-1.5 shadow-lg shadow-red-500/5">
-                    <div class="text-2xl font-black text-red-500 tracking-tighter leading-none">Q</div>
-                    <div class="text-[8px] font-black uppercase text-white tracking-widest mt-1">TESTER</div>
-                </div>
+            <!-- Testerup Brand Logo Area -->
+            <div class="w-24 h-24 mb-4 z-10 flex items-center justify-center">
+                <img src="images (1)_3.png" alt="Testerup Logo" class="w-full h-full object-contain drop-shadow-2xl animate-fade-in">
             </div>
             
             <!-- App Rating Badge -->
@@ -71,9 +90,9 @@
         <div class="bg-[#12131a] border border-gray-800/80 rounded-3xl p-5 space-y-5">
             <!-- Game Header Info -->
             <div class="flex items-center space-x-4">
-                <!-- Monopoly Go Premium Game Icon UI Layout Frame -->
+                <!-- Monopoly Go Styled Custom Logo -->
                 <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-red-500 via-amber-500 to-yellow-400 flex flex-col items-center justify-center font-bold text-xl shadow-lg border border-amber-400/20 text-white relative overflow-hidden flex-shrink-0">
-                    <span class="text-3xl filter drop-shadow select-none">🎲</span>
+                    <span class="text-3xl filter drop-shadow">🎲</span>
                     <div class="absolute bottom-0 inset-x-0 bg-black/50 text-[9px] uppercase tracking-tighter text-center font-black py-0.5">GO!</div>
                 </div>
                 <div>
@@ -208,11 +227,11 @@
         function updateTicker() {
             const data = notificationData[currentIndex];
             
-            // Step 1: Slide & fade out smoothly
+            // Slide & fade out smoothly
             container.classList.add('translate-y-[-20px]', 'opacity-0');
             
             setTimeout(() => {
-                // Step 2: Swap the content values
+                // Swap the content values
                 container.innerHTML = `
                     <span class="inline-block text-base select-none">${data.flag}</span>
                     <p><span class="font-semibold text-white">${data.name}</span> just earned <span class="text-red-500 font-bold">${data.payout}</span> — paid instantly</p>
@@ -222,14 +241,13 @@
                 container.classList.remove('translate-y-[-20px]');
                 container.classList.add('translate-y-[20px]');
                 
-                // Step 3: Trigger entrance slide-up frame
+                // Trigger entrance slide-up frame
                 setTimeout(() => {
                     container.classList.remove('translate-y-[20px]', 'opacity-0');
                 }, 50);
 
-            }, 400); // Timed with tailwind transition engine values
+            }, 400);
 
-            // Increment index loop
             currentIndex = (currentIndex + 1) % notificationData.length;
         }
 
@@ -245,12 +263,6 @@
             } else {
                 modal.classList.add('hidden');
             }
-        }
-
-        // Image validation error fallback logic engine
-        function handleLogoFallback() {
-            document.getElementById('main-logo').classList.add('hidden');
-            document.getElementById('logo-fallback').classList.remove('hidden');
         }
     </script>
 </body>
