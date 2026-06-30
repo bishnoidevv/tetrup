@@ -1,0 +1,21 @@
+/* Base Background Configuration */
+body {
+    background-color: #0d0e12;
+}
+
+/* Premium radial ambient glow behind the logo */
+.glow-bg {
+    background: radial-gradient(circle at center, rgba(239, 68, 68, 0.12) 0%, rgba(0,0,0,0) 70%);
+}
+
+/* Custom scrollbar to keep layout clean */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #0d0e12;
+}
+::-webkit-scrollbar-thumb {
+    background: #222531;
+    border-radius: 10px;
+}
